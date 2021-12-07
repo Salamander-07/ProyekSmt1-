@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+public class MyClass {
+    public static void main(String args[]) {
+
+Scanner input = new Scanner(System.in);
+
+String[] nama = new String[];
+String[] daerah1= new String[];
+
+
+System.out.printf("♥♥♥ SELAMAT DATANG DI KANTOR EKSPEDISI CABANG MALANG ♥♥♥\nJl.  Jl. Soekarno Hatta No. 9 Malang. \nKota : Kota Malang - Provinsi Jawa Timur - Indonesia.\nKode Pos : 65141. \nTelepon : (0341) 404424-404425.\n\nOleh:\nMuhammad Helmi Permana Agung\nMuhammad Rayhan Gibran\nRama Wijaya\n\n");
+for(int awal=0; ; awal++){
+    System.out.printf("\nMenu\n1. Mengirim Barang\n2. Cetak resi Resi\n3. Keluar\nSilahkan pilih menu : ");
+    int pil1 = input.nextInt();
+    if(pil1 == 1){
+        System.out.printf("\nSilahkan masukkan nama pengirim : ");
+        nama[0] = input.nextLine();
+        System.out.printf("\nSilahkan masukkan nomor telepon pengirim: ");
+        
+        System.out.printf("\nSilahkan masukkan nama penerima : ");
+        nama[1] = input.nextLine();
+        System.out.printf("\nSilahkan masukkan nomor telepon penerima: ");
+        System.out.printf("\nSilahkan masukkan provinsi penerima: ");
+        daerah[1] = input.nextLine();
+        System.out.printf("\nSilahkan masukkan kab/kota penerima  : ");
+        System.out.printf("\nSilahkan masukkan kecamatan penerima : ");
+        System.out.printf("\nSilahkan masukkan kose pos  penerima : ");
+        int kodepos = input.nextInt;
+        System.out.printf("\nSilahkan masukkan alamat lengkap     : ");
+        
+        System.out.printf("\n1.Barang berharga \n2.Barang medioker \nSilahkan pilih jenis barang");
+        int jenisbarang = input.nextInt();
+        if (jenisbarang == 1)
+            int hargajenis = 50000;
+        if (jenisbang == 2)
+            int hargajenis = 20000;
+        System.out.printf("\nSilahkan masukkan berat barang  : ");
+        int berat = input.nextInt;
+        if (berat<=5)
+        double hargaberat == 10000;
+        if ( 5<berat<=10 )
+        double hargaberat == 15000;
+        if ( berat>10 )
+        double hargaberat == 25000;
+        System.out.printf("\nSilahkan pilih jenis Layanan \n1.Hemat\n2.Regular\n3.Kilat \nSilahkan pilih menu : ");
+        int pil2 = input.nextInt();
+        if(pil 2 == 1){
+            double hargalayanan = 10000
+        }
+        if(pil2 == 2){
+            double hargalayanan = 15000 
+        }
+        else if(pil2 == 3){
+            double hargalaynan =  30000
+        }
+        System.out.printf("Apakah anda ingin menggunakan asuransi \n1.YA\n2.TIDAK");
+        int pil3 = input.nextInt();
+        if(pil3 == 1){
+            double hargaasuransi = 10000
+        }
+        if(pil3 == 2){
+            double hargaasuransi = 0
+        }
+        double total = (hargajenis + hargalayanan + harga asuransi + hargaberat)*110/100;
+        
+        
+        System.out.println("Nomor Resi: " + kodepos + "MLG");
+        System.out.println("Nama Penerima: " + namapenerima + "MLG");
+    } else if(pil1==2){
+        
+        
+    } else if(pil1==3){
+        System.out.printf("♥♥♥ TERIMA KASIH TELAH MENGGUNAKAN LAYANAN KAMI ♥♥♥");
+        break;
+    }
+    
+}
+    }
+}
