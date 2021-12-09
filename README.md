@@ -8,3 +8,4 @@ fungsi inputan
 
 yang dibutuhkan:
 cetak resi
+array provinsi satu dimensi memanggil dari pilihan inputan provinsi
