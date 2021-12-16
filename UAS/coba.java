@@ -5,11 +5,12 @@ public class coba{
     //variabel global
     static Random random = new Random();
     static Scanner sc = new Scanner(System.in);
-    static int pilihMenuUtama, pilihMenuKirimBarang, pilihMenuUbahDataHarga, fungsiCekResi;
+    static int pilihMenuUtama, pilihMenuKirimBarang, pilihMenuUbahDataHarga, fungsiCekResi, indeksProvinsi, indeksTarif, indeksPilihProvinsiKirimBarang, indeksPilihProvinsi, indeksPilihTarif;
+    static int pilihJenisBarang,  pilihJenisLayanan, pilihAsuransi;
     static String[][] dataPengguna = new String[2][2];
-    static String[] daerah = new String[2];
+    static String[] daerah = new String[5];
     static String alamat;
-    static double hargaJenis, hargaBerat, hargaLayanan, hargaAsuransi, total, nomor1, nomor2;
+    static double hargaJenisBarang, beratBarang, hargaBeratBarang, hargaJenisLayanan, hargaAsuransi, total, nomor1, nomor2;
     static String[] provinsi = {"None", "Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "jambi", "Sumatera Selatan", "Kepulauan Bangka Belitung", "Bengkulu", "Lampung",
            "DKI Jakarta", "Banten", "Jawa Barat", "Jawa Tengah", "DI Yogyakarta", "Jawa Timur", "Bali", "Nusa Tenggara timur", "Kalimantan Barat",
            "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Sulawesi Utara", "Gorontalo", "Sulawesi Tengah", "Sulawesi Barat", "Sulawesi Tenggara",
@@ -19,13 +20,15 @@ public class coba{
             35000, 30000, 30000, 35000, 35000, 30000, 30000, 28000, 25000, 25000,
             35000, 35000, 35000, 30000};
 
+    
     //fungsi
-    static void menuKirimBarang(){
+    
+    static void menuKirimBarang(){ //untuk kirim barang
         for(int ulangMenuKirimBarang=0;;ulangMenuKirimBarang++){
-        System.out.printf("\nMmenu\n1. Input Data\n2. Cek Data\n3. Ubah Data\n4. Kerjakan Proses Pengiriman\n5. Kembali\nSilahkan pilih menu: ");
+        System.out.printf("\nMenu\n1. Input Data\n2. Cek Data\n3. Ubah Data\n4. Kerjakan Proses Pengiriman\n5. Kembali\nSilahkan pilih menu: ");
         pilihMenuKirimBarang = sc.nextInt();
         if(pilihMenuKirimBarang==1){//ke input data kirim barang
-            System.out.printf("ok");
+            inputDataKirimBarang();
         }else if(pilihMenuKirimBarang==2){//ke cek data kirim barang
             System.out.printf("ok");
         }else if(pilihMenuKirimBarang==3){//ke ubah data kirim barang
@@ -39,10 +42,24 @@ public class coba{
         }
         }   
     }
-    static void menuUbahDataHarga(){}
-    static void membuatResi(){}
+    static void menuUbahDataHarga(){//untuk ubah data
+    }
+    static void membuatResi(){//untuk cek resi
+    }
+
+    //untuk \ kirim barang \ input data kirim barang \
     static void inputDataKirimBarang(){
+        //input nama dan nomer telepon
+        inputDataKirimBarangPengirimPenerima();
+        //input alamat penerima
+        inputDataKirimBarangAlamat();
+        //input jenis pengiriman
+        inputDataKirimBarangJenisPengiriman();
+    }
+    //untuk \ kirim barang \ input data kirim barang \ pengirim/penerima
+    static void inputDataKirimBarangPengirimPenerima(){
         System.out.printf("Masukkan nama pengirim: ");
+        dataPengguna[0][0]=sc.nextLine();
         dataPengguna[0][0]=sc.nextLine();
         System.out.printf("Masukkan nama penerima: ");
         dataPengguna[1][0]=sc.nextLine();
@@ -51,7 +68,75 @@ public class coba{
         System.out.printf("Masukkan nomor telepon penerima: ");
         dataPengguna[0][1]=sc.nextLine();
     }
+    //untuk \ kirim barang \ input data kirim barang \ alamat
+    static void inputDataKirimBarangAlamat(){
+        for(int ulangInputData=0;;ulangInputData++){
+            for(indeksProvinsi=1; indeksProvinsi<provinsi.length; indeksProvinsi++){
+                System.out.printf("%d %s\n",indeksProvinsi,provinsi[indeksProvinsi]);
+            }
 
+            System.out.printf("Pilih provinsi yang dituju untuk pengiriman barang: ");
+            indeksPilihProvinsiKirimBarang = sc.nextInt();
+            if(indeksPilihProvinsiKirimBarang>=1 && indeksPilihProvinsiKirimBarang<provinsi.length){
+                break;
+            }else{
+                System.out.printf("\nSilahkan ulangi dengan angka yang valid!\n");
+            }
+        }    
+        daerah[0]=provinsi[indeksPilihProvinsiKirimBarang];
+        System.out.printf("Masukkan kabupaten/kota penerima: ");
+        daerah[1]=sc.nextLine();
+        daerah[1]=sc.nextLine();
+        System.out.printf("Masukkan kecamatan penerima: ");
+        daerah[2]=sc.nextLine();
+        System.out.printf("Masukkan kode pos penerima: ");
+        daerah[3]=sc.nextLine();
+        System.out.printf("Masukkan alamat tambahan (jalan, desa, apartment, dsb.) penerima: ");
+        daerah[4]=sc.nextLine();
+    }
+    //untuk \ kirim barang \ input data kirim barang \ jenis pengiriman
+    static void inputDataKirimBarangJenisPengiriman(){
+        for(int ulangJenisBarang=0;;ulangJenisBarang++){
+            System.out.printf("\nBerikut jenis barang:\n1. Barang berharga\n2. Barang medioker\nPilih jenis barang yang dikirim: ");
+            pilihJenisBarang=sc.nextInt();
+            if(pilihJenisBarang==1){hargaJenisBarang=50000; break;}
+            else if(pilihJenisBarang==2){hargaJenisBarang=20000; break;}
+            else{System.out.printf("\nPilih antara 1 atau 2!\n");}
+        }
+        for(int ulangBeratBarang=0;;ulangBeratBarang++){
+            System.out.printf("\nMasukkan berat barang (dalam kg): ");
+            beratBarang=sc.nextDouble();
+            if(beratBarang>=0 && beratBarang<5){hargaBeratBarang=10000; break;}
+            else if(beratBarang>=5 && beratBarang<=10){hargaBeratBarang=15000; break;}
+            else if(beratBarang>10){hargaBeratBarang=25000; break;}
+            else{System.out.printf("\nMasukkan berat barang dalam kg!!\n");}
+        }
+        for(int ulangJenisLayanan=0;;ulangJenisLayanan++){
+            System.out.printf("\nSilahkan pilih jenis Layanan \n1. Hemat\n2. Regular\n3. Kilat \nSilahkan pilih menu : ");
+            pilihJenisLayanan=sc.nextInt();
+            if(pilihJenisLayanan==1){hargaJenisLayanan=10000; break;}
+            else if(pilihJenisLayanan==2){hargaJenisLayanan=15000; break;}
+            else if(pilihJenisLayanan==3){hargaJenisLayanan=30000; break;}
+            else{System.out.print("\nPilih antara 1-3!\n");}
+        }
+        for(int ulangAsuransi=0;;ulangAsuransi++){
+            System.out.printf("\nApakah anda ingin menggunakan asuransi?\n1. Ya\t2. Tidak\n(1/2):");
+            pilihAsuransi=sc.nextInt();
+            if(pilihAsuransi==1){hargaAsuransi=10000; break;}
+            else if(pilihAsuransi==2){hargaAsuransi=0; break;}
+            else{System.out.printf("\nPilih antara 1 atau 2!\n");}
+        }
+    }
+    
+
+
+    //untuk \ kirim barang \ cek data kirim barang \
+
+    //untuk \ kirim barang \ ubah data kirim barang \
+    
+    //untuk \ kirim barang \ proses kirim barang(resi) \
+
+    //main
     public static void main(String[] args){
         //menu utama
 
