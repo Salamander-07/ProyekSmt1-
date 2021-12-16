@@ -18,9 +18,11 @@ public class coba{
             25000, 25000, 20000, 15000, 15000, 10000, 20000, 25000, 30000, 35000,
             35000, 30000, 30000, 35000, 35000, 30000, 30000, 28000, 25000, 25000,
             35000, 35000, 35000, 30000};
+
+    //fungsi
     static void menuKirimBarang(){
         for(int ulangMenuKirimBarang=0;;ulangMenuKirimBarang++){
-        System.out.printf("\nSilahkan pilih menu:\n1. Input Data\n2. Cek Data\n3. Ubah Data\n4. Kerjakan Proses Pengiriman\n5. Kembali\n");
+        System.out.printf("\nMmenu\n1. Input Data\n2. Cek Data\n3. Ubah Data\n4. Kerjakan Proses Pengiriman\n5. Kembali\nSilahkan pilih menu: ");
         pilihMenuKirimBarang = sc.nextInt();
         if(pilihMenuKirimBarang==1){//ke input data kirim barang
             System.out.printf("ok");
@@ -54,7 +56,7 @@ public class coba{
         //menu utama
 
         for(int ulangMenu=0;;ulangMenu++){
-        System.out.printf("\n♥♥♥ SELAMAT DATANG DI KANTOR EKSPEDISI KAPITALIS CABANG MALANG ♥♥♥\nJl. Soekarno Hatta No.9 Malang\nKota     : Kota Malang - Provinsi Jawa Timur - Indonesia\nKode Pos : 65141\nTelepon  : (0341) 404424-404425\n\nOleh     :\nMuhammad Helmi Permana Agung (19) \nMuhammad Rayhan Gibran       (21)\nRama Wijaya                  (23)\n\n");
+        System.out.printf("\nSELAMAT DATANG DI KANTOR EKSPEDISI KAPITALIS CABANG MALANG\nJl. Soekarno Hatta No.9 Malang\nKota     : Kota Malang - Provinsi Jawa Timur - Indonesia\nKode Pos : 65141\nTelepon  : (0341) 404424-404425\n\nOleh     :\nMuhammad Helmi Permana Agung (19) \nMuhammad Rayhan Gibran       (21)\nRama Wijaya                  (23)\n\n");
             System.out.printf("\nMenu\n1. Kirim Barang\n2. Ubah harga\n3. Cetak resi\n4. Keluar\nSilahkan pilih menu : ");
             pilihMenuUtama = sc.nextInt();
         if (pilihMenuUtama==1){//Masuk ke menu kirim barang
