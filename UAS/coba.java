@@ -5,12 +5,15 @@ public class coba{
     //variabel global
     static Random random = new Random();
     static Scanner sc = new Scanner(System.in);
-    static int pilihMenuUtama, pilihMenuKirimBarang, pilihMenuUbahDataHarga, fungsiCekResi, indeksProvinsi, indeksTarif, indeksPilihProvinsiKirimBarang, indeksPilihProvinsi, indeksPilihTarif;
+    static int pilihMenuUtama, pilihMenuKirimBarang, pilihMenuUbahDataHarga, pilihMenuUbahDataBarang, fungsiCekResi, indeksProvinsi, indeksTarif, indeksPilihProvinsiKirimBarang, indeksPilihProvinsi, indeksPilihTarif, number;
     static int pilihJenisBarang,  pilihJenisLayanan, pilihAsuransi;
     static String[][] dataPengguna = new String[2][2];
     static String[] daerah = new String[5];
     static String alamat;
     static double hargaJenisBarang, beratBarang, hargaBeratBarang, hargaJenisLayanan, hargaAsuransi, total, nomor1, nomor2;
+    static String[] jenisBarang = {"None", "Barang Berharga", "Barang Medioker"};
+    static String[] jenisLayanan = {"None", "Hemat", "Reguler", "Kilat"};
+    static String[] jenisAsuransi = {"None", "Ya", "Tidak"};
     static String[] provinsi = {"None", "Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan Riau", "jambi", "Sumatera Selatan", "Kepulauan Bangka Belitung", "Bengkulu", "Lampung",
            "DKI Jakarta", "Banten", "Jawa Barat", "Jawa Tengah", "DI Yogyakarta", "Jawa Timur", "Bali", "Nusa Tenggara timur", "Kalimantan Barat",
            "Kalimantan Tengah", "Kalimantan Selatan", "Kalimantan Timur", "Sulawesi Utara", "Gorontalo", "Sulawesi Tengah", "Sulawesi Barat", "Sulawesi Tenggara",
@@ -22,6 +25,18 @@ public class coba{
 
     
     //fungsi
+
+    static void angkaRandom(){ //membuat angka random untuk resi
+        for(int ulangRandom=0;;ulangRandom++){
+            number=random.nextInt();
+            if(number<24651 && number>85645){continue;}
+            else if(number>=24651 && number<=85645){break;}
+        }
+    }
+    static double hitungTotal(double ha, double hjb, double hjl, double hbb, double tap){//hitung harga
+        total=(ha+hjb+hjl+hbb+tap)*110/100;
+        return total;
+    }
     
     static void menuKirimBarang(){ //untuk kirim barang
         for(int ulangMenuKirimBarang=0;;ulangMenuKirimBarang++){
@@ -30,11 +45,11 @@ public class coba{
         if(pilihMenuKirimBarang==1){//ke input data kirim barang
             inputDataKirimBarang();
         }else if(pilihMenuKirimBarang==2){//ke cek data kirim barang
-            System.out.printf("ok");
+            cekDataKirimBarang();
         }else if(pilihMenuKirimBarang==3){//ke ubah data kirim barang
-            System.out.printf("ok");
+            ubahDataBarang();
         }else if(pilihMenuKirimBarang==4){//ke membuat resi
-            System.out.printf("ok");
+            prosesKirimBarang();
         }else if(pilihMenuKirimBarang==5){//kembali
             break;
         }else{
@@ -42,10 +57,16 @@ public class coba{
         }
         }   
     }
+    static void membuatResi(){//untuk cek resi
+        System.out.printf("\n\n-------------------------------------------------- Resi anda --------------------------------------------------");
+        System.out.printf("\nNomor Resi     : %s%d",daerah[4],number);
+        cekDataKirimBarang();
+        System.out.printf("\nharga total yang harus dibayar + PPN 10 persen : Rp. %.1f\n",hitungTotal(hargaAsuransi,hargaJenisBarang,hargaJenisLayanan,hargaBeratBarang,tarif[indeksPilihProvinsiKirimBarang]));
+        System.out.printf("-------------------------------------------------------------------------------------------------------------------\n\n");
+    }
     static void menuUbahDataHarga(){//untuk ubah data
     }
-    static void membuatResi(){//untuk cek resi
-    }
+
 
     //untuk \ kirim barang \ input data kirim barang \
     static void inputDataKirimBarang(){
@@ -66,7 +87,7 @@ public class coba{
         System.out.printf("Masukkan nomor telepon pengirim: ");
         dataPengguna[0][1]=sc.nextLine();
         System.out.printf("Masukkan nomor telepon penerima: ");
-        dataPengguna[0][1]=sc.nextLine();
+        dataPengguna[1][1]=sc.nextLine();
     }
     //untuk \ kirim barang \ input data kirim barang \ alamat
     static void inputDataKirimBarangAlamat(){
@@ -89,10 +110,11 @@ public class coba{
         daerah[1]=sc.nextLine();
         System.out.printf("Masukkan kecamatan penerima: ");
         daerah[2]=sc.nextLine();
-        System.out.printf("Masukkan kode pos penerima: ");
-        daerah[3]=sc.nextLine();
         System.out.printf("Masukkan alamat tambahan (jalan, desa, apartment, dsb.) penerima: ");
+        daerah[3]=sc.nextLine();
+        System.out.printf("Masukkan kode pos penerima: ");
         daerah[4]=sc.nextLine();
+        
     }
     //untuk \ kirim barang \ input data kirim barang \ jenis pengiriman
     static void inputDataKirimBarangJenisPengiriman(){
@@ -127,31 +149,56 @@ public class coba{
             else{System.out.printf("\nPilih antara 1 atau 2!\n");}
         }
     }
-    
-
-
     //untuk \ kirim barang \ cek data kirim barang \
-
+    static void cekDataKirimBarang(){
+        System.out.printf("\nNama Pengirim\t: %s\n",dataPengguna[0][0]);
+        System.out.printf("\nNomor Pengirim\t: %s\n",dataPengguna[0][1]);
+        System.out.printf("\nNama Penerima\t: %s\n",dataPengguna[1][0]);
+        System.out.printf("\nNomor Penerima\t: %s\n",dataPengguna[1][1]);
+        System.out.printf("\nAlamat Penerima\t: %s, %s, %s, %s, %s\n",daerah[3],daerah[2],daerah[1],daerah[0],daerah[4]);
+        System.out.printf("\nJenis Barang\t: %s (%f)\n",jenisBarang[pilihJenisBarang],hargaJenisBarang);
+        System.out.printf("\nBerat Barang\t: %f kg (%f)\n",beratBarang,hargaBeratBarang);
+        System.out.printf("\nJenis Layanan\t: %s (%f)\n",jenisLayanan[pilihJenisLayanan],hargaJenisLayanan);
+        System.out.printf("\nAsuransi \t: %s (%f)\n",jenisAsuransi[pilihAsuransi],hargaAsuransi);
+    }
     //untuk \ kirim barang \ ubah data kirim barang \
-    
+    static void ubahDataBarang(){
+        for(int ulangUbahDataBarang=0;;ulangUbahDataBarang++){
+        System.out.printf("\n1. Nama\n2. Alamat\n3. Jenis Pengiriman\n4. Kembali\nPilih yang akan diubah: ");
+        pilihMenuUbahDataBarang=sc.nextInt();
+        if(pilihMenuUbahDataBarang==1){inputDataKirimBarangPengirimPenerima();break;}
+        else if(pilihMenuUbahDataBarang==2){inputDataKirimBarangAlamat();break;}
+        else if(pilihMenuUbahDataBarang==3){inputDataKirimBarangJenisPengiriman();break;}
+        else if(pilihMenuUbahDataBarang==4){break;}
+        else{System.out.printf("Pilih menu antara 1-4!");}
+        }
+    }
     //untuk \ kirim barang \ proses kirim barang(resi) \
+    static void prosesKirimBarang(){
+        System.out.printf("\nPermintaan anda telah diproses, berikut adalah resi anda\n\n");
+        membuatResi();
+    }
+
+
+
+
 
     //main
     public static void main(String[] args){
         //menu utama
-
+        angkaRandom();
         for(int ulangMenu=0;;ulangMenu++){
         System.out.printf("\nSELAMAT DATANG DI KANTOR EKSPEDISI KAPITALIS CABANG MALANG\nJl. Soekarno Hatta No.9 Malang\nKota     : Kota Malang - Provinsi Jawa Timur - Indonesia\nKode Pos : 65141\nTelepon  : (0341) 404424-404425\n\nOleh     :\nMuhammad Helmi Permana Agung (19) \nMuhammad Rayhan Gibran       (21)\nRama Wijaya                  (23)\n\n");
-            System.out.printf("\nMenu\n1. Kirim Barang\n2. Ubah harga\n3. Cetak resi\n4. Keluar\nSilahkan pilih menu : ");
+            System.out.printf("\nMenu\n1. Kirim Barang\n2. Lihat Resi\n3. Ubah Harga\n4. Keluar\nSilahkan pilih menu : ");
             pilihMenuUtama = sc.nextInt();
         if (pilihMenuUtama==1){//Masuk ke menu kirim barang
             menuKirimBarang();
-        }else if(pilihMenuUtama==2){//Masuk ke menu ubah data harga
-            menuUbahDataHarga();
-        }else if(pilihMenuUtama==3){//Masuk ke membuat resi
+        }else if(pilihMenuUtama==2){//Masuk ke membuat resi
             membuatResi();
+        }else if(pilihMenuUtama==3){//Masuk ke menu ubah data harga
+            menuUbahDataHarga();
         }else if(pilihMenuUtama==4){//stop aplikasi
-            System.out.printf("Sampai jumpa lagi besok!\n");
+            System.out.printf("\nSampai jumpa lagi besok!\n\n");
             break;
         }else{//tidak valid
             System.out.printf("Angka yang anda masukkan tidak valid, silahkan memilih menu yang tersedia.\n");
