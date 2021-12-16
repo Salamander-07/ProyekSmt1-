@@ -10,7 +10,7 @@ public class coba{
     static String[][] dataPengguna = new String[2][2];
     static String[] daerah = new String[5];
     static String alamat;
-    static double hargaJenisBarang, beratBarang, hargaBeratBarang, hargaJenisLayanan, hargaAsuransi, total, nomor1, nomor2;
+    static double tarifProvinsi, hargaJenisBarang, hargaJenisBarangMedioker=20000, hargaJenisBarangBerharga=50000, beratBarang, hargaBeratBarang, hargaBeratBarangRingan=10000, hargaBeratBarangSedang=15000, hargaBeratBarangBerat=25000, hargaJenisLayanan, hargaJenisLayananHemat=10000, hargaJenisLayananReguler=15000, hargaJenisLayananKilat=30000, hargaAsuransi, hargaAsuransiYa=10000, hargaAsuransiTidak=0, total;
     static String[] jenisBarang = {"None", "Barang Berharga", "Barang Medioker"};
     static String[] jenisLayanan = {"None", "Hemat", "Reguler", "Kilat"};
     static String[] jenisAsuransi = {"None", "Ya", "Tidak"};
@@ -61,10 +61,21 @@ public class coba{
         System.out.printf("\n\n-------------------------------------------------- Resi anda --------------------------------------------------");
         System.out.printf("\nNomor Resi     : %s%d",daerah[4],number);
         cekDataKirimBarang();
-        System.out.printf("\nharga total yang harus dibayar + PPN 10 persen : Rp. %.1f\n",hitungTotal(hargaAsuransi,hargaJenisBarang,hargaJenisLayanan,hargaBeratBarang,tarif[indeksPilihProvinsiKirimBarang]));
+        System.out.printf("\nharga total yang harus dibayar + PPN 10 persen : Rp. %.1f\n",hitungTotal(hargaAsuransi,hargaJenisBarang,hargaJenisLayanan,hargaBeratBarang,tarifProvinsi));
         System.out.printf("-------------------------------------------------------------------------------------------------------------------\n\n");
     }
     static void menuUbahDataHarga(){//untuk ubah data
+        for(int ulangMenuUbahDataHarga=0;;ulangMenuUbahDataHarga++){
+        System.out.printf("\nApa yang ingin anda ubah?\n1. Tarif Provinsi\n2. Harga Jenis Barang\n3. Harga Berat Barang\n4. Harga Layanan\n5. Harga Asuransi\n6. Kembali\nKetik nomor(1-6): ");
+        pilihMenuUbahDataHarga=sc.nextInt();
+        if(pilihMenuUbahDataHarga==1){ubahTarifProvinsi();}
+        else if(pilihMenuUbahDataHarga==2){ubahHargaJenisBarang();}
+        else if(pilihMenuUbahDataHarga==3){ubahHargaBeratBarang();}
+        else if(pilihMenuUbahDataHarga==4){ubahHargaLayanan();}
+        else if(pilihMenuUbahDataHarga==5){ubahHargaAsuransi();}
+        else if(pilihMenuUbahDataHarga==6){break;}
+        else{System.out.printf("Maaf masukan anda tidak valid, masukan angka 1-6!");}
+        }
     }
 
 
@@ -99,6 +110,7 @@ public class coba{
             System.out.printf("Pilih provinsi yang dituju untuk pengiriman barang: ");
             indeksPilihProvinsiKirimBarang = sc.nextInt();
             if(indeksPilihProvinsiKirimBarang>=1 && indeksPilihProvinsiKirimBarang<provinsi.length){
+                tarifProvinsi = tarif[indeksPilihProvinsiKirimBarang];
                 break;
             }else{
                 System.out.printf("\nSilahkan ulangi dengan angka yang valid!\n");
@@ -121,16 +133,16 @@ public class coba{
         for(int ulangJenisBarang=0;;ulangJenisBarang++){
             System.out.printf("\nBerikut jenis barang:\n1. Barang berharga\n2. Barang medioker\nPilih jenis barang yang dikirim: ");
             pilihJenisBarang=sc.nextInt();
-            if(pilihJenisBarang==1){hargaJenisBarang=50000; break;}
-            else if(pilihJenisBarang==2){hargaJenisBarang=20000; break;}
+            if(pilihJenisBarang==1){hargaJenisBarang=hargaJenisBarangBerharga; break;}
+            else if(pilihJenisBarang==2){hargaJenisBarang=hargaJenisBarangMedioker; break;}
             else{System.out.printf("\nPilih antara 1 atau 2!\n");}
         }
         for(int ulangBeratBarang=0;;ulangBeratBarang++){
             System.out.printf("\nMasukkan berat barang (dalam kg): ");
             beratBarang=sc.nextDouble();
-            if(beratBarang>=0 && beratBarang<5){hargaBeratBarang=10000; break;}
-            else if(beratBarang>=5 && beratBarang<=10){hargaBeratBarang=15000; break;}
-            else if(beratBarang>10){hargaBeratBarang=25000; break;}
+            if(beratBarang>=0 && beratBarang<5){hargaBeratBarang=hargaBeratBarangRingan; break;}
+            else if(beratBarang>=5 && beratBarang<=10){hargaBeratBarang=hargaBeratBarangSedang; break;}
+            else if(beratBarang>10){hargaBeratBarang=hargaBeratBarangBerat; break;}
             else{System.out.printf("\nMasukkan berat barang dalam kg!!\n");}
         }
         for(int ulangJenisLayanan=0;;ulangJenisLayanan++){
@@ -144,8 +156,8 @@ public class coba{
         for(int ulangAsuransi=0;;ulangAsuransi++){
             System.out.printf("\nApakah anda ingin menggunakan asuransi?\n1. Ya\t2. Tidak\n(1/2):");
             pilihAsuransi=sc.nextInt();
-            if(pilihAsuransi==1){hargaAsuransi=10000; break;}
-            else if(pilihAsuransi==2){hargaAsuransi=0; break;}
+            if(pilihAsuransi==1){hargaAsuransi=hargaAsuransiYa; break;}
+            else if(pilihAsuransi==2){hargaAsuransi=hargaAsuransiTidak; break;}
             else{System.out.printf("\nPilih antara 1 atau 2!\n");}
         }
     }
@@ -180,6 +192,52 @@ public class coba{
     }
 
 
+
+    //untuk \ ubah harga \ tarif provinsi
+    static void ubahTarifProvinsi(){
+        for(int ulangUbahTarifProvinsi=0;;ulangUbahTarifProvinsi++){
+            for(int ulangUbahTarifProvinsi2=1;ulangUbahTarifProvinsi2<provinsi.length;ulangUbahTarifProvinsi2++){
+                System.out.printf("\n%d. %s (%f)\n",ulangUbahTarifProvinsi2,provinsi[ulangUbahTarifProvinsi2],tarif[ulangUbahTarifProvinsi2]);
+            }
+            System.out.printf("\nProvinsi mana yang ingin anda ubah?\n");
+            indeksPilihProvinsi=sc.nextInt();
+            if(indeksPilihProvinsi>=1 && indeksPilihProvinsi<provinsi.length){
+                System.out.printf("\nMasukkan harga baru untuk provinsi %s\n",provinsi[indeksPilihProvinsi]);
+                tarif[indeksPilihProvinsi]=sc.nextDouble();
+                break;
+            }else{System.out.printf("Masukan anda tidak valid, silahkan memilih ulang!");}
+        }
+    }
+    //untuk \ ubah harga \ harga jenis
+    static void ubahHargaJenisBarang(){
+        System.out.printf("\nMasukkan harga baru untuk jenis 'Barang Berharga': ");
+        hargaJenisBarangBerharga = sc.nextDouble();
+        System.out.printf("\nMasukkan harga baru untuk jenis 'Barang Medioker': ");
+        hargaJenisBarangMedioker = sc.nextDouble();
+    }
+    //untuk \ ubah harga \ harga berat
+    static void ubahHargaBeratBarang(){
+        System.out.printf("\nMasukkan harga baru untuk 'Barang Ringan': ");
+        hargaBeratBarangRingan = sc.nextDouble();
+        System.out.printf("\nMasukkan harga baru untuk 'Barang Sedang': ");
+        hargaBeratBarangSedang = sc.nextDouble();
+        System.out.printf("\nMasukkan harga baru untuk 'Barang Berat': ");
+        hargaBeratBarangBerat = sc.nextDouble();
+    }
+    //untuk \ ubah harga \ harga layanan
+    static void ubahHargaLayanan(){
+        System.out.printf("\nMasukkan harga baru untuk 'Layanan Hemat': ");
+        hargaJenisLayananHemat = sc.nextDouble();
+        System.out.printf("\nMasukkan harga baru untuk 'Layanan Reguler': ");
+        hargaJenisLayananReguler = sc.nextDouble();
+        System.out.printf("\nMasukkan harga baru untuk 'Layanan Kilat': ");
+        hargaJenisLayananKilat = sc.nextDouble();
+    }
+    //untuk \ ubah harga \ harga asuransi
+    static void ubahHargaAsuransi(){
+        System.out.printf("\nMasukkan harga baru untuk 'Asuransi': ");
+        hargaAsuransiYa = sc.nextDouble();
+    }
 
 
 
