@@ -18,10 +18,28 @@ public class coba{
             25000, 25000, 20000, 15000, 15000, 10000, 20000, 25000, 30000, 35000,
             35000, 30000, 30000, 35000, 35000, 30000, 30000, 28000, 25000, 25000,
             35000, 35000, 35000, 30000};
-    static void menuKirimBarang(){}
+    static void menuKirimBarang(){
+        for(int ulangMenuKirimBarang=0;;ulangMenuKirimBarang++){
+        System.out.printf("\nSilahkan pilih menu:\n1. Input Data\n2. Cek Data\n3. Ubah Data\n4. Kerjakan Proses Pengiriman\n5. Kembali\n");
+        pilihMenuKirimBarang = sc.nextInt();
+        if(pilihMenuKirimBarang==1){//ke input data kirim barang
+            System.out.printf("ok");
+        }else if(pilihMenuKirimBarang==2){//ke cek data kirim barang
+            System.out.printf("ok");
+        }else if(pilihMenuKirimBarang==3){//ke ubah data kirim barang
+            System.out.printf("ok");
+        }else if(pilihMenuKirimBarang==4){//ke membuat resi
+            System.out.printf("ok");
+        }else if(pilihMenuKirimBarang==5){//kembali
+            break;
+        }else{
+            System.out.printf("\nInputan anda tidak valid, ulangi dengan memasukkan angka untuk memilih menu!\n");
+        }
+        }   
+    }
     static void menuUbahDataHarga(){}
     static void membuatResi(){}
-    static void inputDataPengguna(){
+    static void inputDataKirimBarang(){
         System.out.printf("Masukkan nama pengirim: ");
         dataPengguna[0][0]=sc.nextLine();
         System.out.printf("Masukkan nama penerima: ");
@@ -36,7 +54,7 @@ public class coba{
         //menu utama
 
         for(int ulangMenu=0;;ulangMenu++){
-        System.out.printf("♥♥♥ SELAMAT DATANG DI KANTOR EKSPEDISI KAPITALIS CABANG MALANG ♥♥♥\nJl. Soekarno Hatta No.9 Malang\nKota     : Kota Malang - Provinsi Jawa Timur - Indonesia\nKode Pos : 65141\nTelepon  : (0341) 404424-404425\n\nOleh     :\nMuhammad Helmi Permana Agung (19) \nMuhammad Rayhan Gibran       (21)\nRama Wijaya                  (23)\n\n");
+        System.out.printf("\n♥♥♥ SELAMAT DATANG DI KANTOR EKSPEDISI KAPITALIS CABANG MALANG ♥♥♥\nJl. Soekarno Hatta No.9 Malang\nKota     : Kota Malang - Provinsi Jawa Timur - Indonesia\nKode Pos : 65141\nTelepon  : (0341) 404424-404425\n\nOleh     :\nMuhammad Helmi Permana Agung (19) \nMuhammad Rayhan Gibran       (21)\nRama Wijaya                  (23)\n\n");
             System.out.printf("\nMenu\n1. Kirim Barang\n2. Ubah harga\n3. Cetak resi\n4. Keluar\nSilahkan pilih menu : ");
             pilihMenuUtama = sc.nextInt();
         if (pilihMenuUtama==1){//Masuk ke menu kirim barang
